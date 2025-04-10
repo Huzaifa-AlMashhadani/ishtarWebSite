@@ -1,86 +1,25 @@
 window.addEventListener("load", ()=>{
  const LodeR = document.querySelector(".LodeR");
 
-
- const addtoCard = document.querySelector('.addtoCard');
-    const addorder = document.querySelector('.Addorder');
-    disFrom = document.querySelector(".DisbolOrder"),
-    chakorder = document.querySelector(".chacher"),
-    
-    
-  
-
-    addtoCard.onclick = ()=>{
-        addorder.style.display = "block"
-
-       
-        
-    }
-    disFrom.onclick = ()=>{
-       addorder.style.display = "none";
-        
-    }
-
-
-    const ImageOrder1 = document.getElementById("Image1"),
- ImageOrder12 = document.getElementById("Image2"),
- InputImage1 = document.getElementById("image1"),
- ImageOrder3 = document.getElementById("Image3"),
- InputImage3 = document.getElementById("image3"),
- InputImage2 = document.getElementById("image2");
-
- InputImage1.onchange = ()=>{
-  ImageOrder1.src = URL.createObjectURL(InputImage1.files[0])
- }
- InputImage2.onchange = ()=>{
-  ImageOrder12.src = URL.createObjectURL(InputImage2.files[0])
- }
- InputImage3.onchange = ()=>{
-  ImageOrder3.src = URL.createObjectURL(InputImage3.files[0])
- }
-
-
-    const ActiveImageSlider = document.querySelector(".active");
-    const ImageSliderNoActive = document.querySelectorAll(".activeImage img");
-    const noactiveImage = document.querySelector(".noactive");
-    const ImageActSRC = document.querySelector(".imageslider img");
-    
-
-    
-    // imageslider
-    
-    
-    ImageSliderNoActive.forEach((imga)=>{
-    imga.addEventListener("click", ()=>{
-     ImageActSRC.src = imga.src
-    })
-    })
 LodeR.style.display = "none";
 
 })
 const 
-form = document.querySelector(".login-form form.Orderfordata"),
-formOeder = document.querySelector("form.FormOrder"),
-BtnSumbit = form.querySelector("button.sned"),
-schakout = form.querySelector("button.Sned"),
+form = document.querySelector(".add-order form"),
+order = document.querySelector(".add-order div.order"),
+BtnSumbit = form.querySelector("button"),
 MasgWoring = document.querySelector(".wornig_maseg"),
-loder = document.querySelector(".LodeR");
-const addorder = document.querySelector('.Addorder');
-const datatext = document.querySelector('.datatext');
-const  CHdisebol = document.querySelector(".CHdisebol");
+loder = document.querySelector(".LodeR"),
+PayMentWindow = document.querySelector(".payment-window"),
+continer = document.querySelector(".order .container"),
+orderDetelisPrice = document.querySelector(".order-detelis h1 span.price"),
+orderName = document.querySelector(".order-detelis .input p.name"),
+orderNumber = document.querySelector(".order-detelis .input p.number"),
+orderAddrese = document.querySelector(".order-detelis .input p.addrese"),
+Order_image = document.querySelector(".images img.Order_image"),
+Price = document.querySelector(".zainCash-payment .container .order-detelis .price-order");
 
 
-
-schakout.onclick = ()=>{
-    chakorder.style.display = "block";
-            datatext.style.display = "none";
-            loder.style.display = "none";
-}
-CHdisebol.onclick = ()=>{
-    chakorder.style.display = "none";
-            datatext.style.display = "block";
-            loder.style.display = "none";
-}
 
 form.onsubmit = (e)=>{
 e.preventDefault()
@@ -89,25 +28,32 @@ e.preventDefault()
 BtnSumbit.onclick = ()=>{
     loder.style.display = "flex";
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "php/claint-order-add.php")
+    xhr.open("POST", "php/chak.php")
     xhr.onload = ()=>{
      if(xhr.readyState === XMLHttpRequest.DONE){
         if(xhr.status === 200){
-         let data = xhr.response;
-         if(data === "sucses"){
-            chakorder.style.display = "block";
-            datatext.style.display = "none";
+         let data = JSON.parse(xhr.response);
+         if(data.success === true){
+            PayMentWindow.style.display = "block";
             loder.style.display = "none";
-            location.href = "orderSubmit.php";
-            // localStorage.setItem("userOrderId", data[0]);
-            // localStorage.setItem("ImagesOrder", data[1]);
-
-
+            continer.style.width = "100%"
+            continer.style.justifyContent = "space-evenly"
+            order.style.display = "none";
+            Price.style.textAlign = "start"
+            orderDetelisPrice.textContent = data.price;
+            Price.innerHTML = data.price / 1000+",000 <span>IQD</span>";
+            orderName.textContent = data.name;
+            orderAddrese.textContent = data.addres;
+            orderNumber.textContent = data.number;
+            Order_image.src = data.printImageName
+            console.log(data)
          }else{
             MasgWoring.style.background = "rgba(255, 0, 0, 0.505)"
             MasgWoring.style.display = "block";
             MasgWoring.textContent = data;
             loder.style.display = "none";
+            console.log(data)
+
          }
         }
      }
@@ -116,3 +62,34 @@ BtnSumbit.onclick = ()=>{
     xhr.send(formdata);
 }
 
+// save order on dataBaes coode 
+
+const form_sendData = document.querySelector(".form_sendData");
+const botton_sendData = form.querySelector(".botton_send_order");
+
+form_sendData.onsubmit = (e)=>{
+   e.preventDefault()
+   }
+   
+   botton_sendData.onclick = ()=>{
+       loder.style.display = "flex";
+       let xhr = new XMLHttpRequest();
+       xhr.open("POST", "php/orderAdd.php")
+       xhr.onload = ()=>{
+        if(xhr.readyState === XMLHttpRequest.DONE){
+           if(xhr.status === 200){
+            let data = xhr.response;
+            if(data.success === true){
+               loder.style.display = "none";
+               console.log(data)
+            }else{
+               loder.style.display = "none";
+               console.log(data)
+            }
+           }
+        }
+       }
+       let formdata = new FormData(form);
+       xhr.send(formdata);
+   }
+   

@@ -43,7 +43,7 @@ if($_SESSION["root_id_4448"] === "1"){
             <li ><a href="Admin-root-orders.php"><i class="fa-solid fa-boxes-stacked"></i>  </a></li>
             <li><a href="Admin-root-items.php"><i class="fa-solid fa-box"></i></a></li>
             <li><a href="Admin-root-addOrder.php"><i class="fa-solid fa-circle-plus fa-2xl"></i></a></li>
-            <li><a href="Admin-root-acount.php"><i class="fa-solid fa-user"></i> </a></li>
+            <li><a href="Admin-root-acount.php"><i class="fa-solid fa-arrows-rotate"></i> </a></li>
             <li><a href="Admin-root-users.php"><i class="fa-solid fa-users"></i></a></li>
             <li><a href="#darckMode" id="darckMode"><i class="fa-solid fa-moon"></i> </a></li>
             <li><a href="#darckMode" id="darckMode-w"><i class="fa-regular fa-moon"></i> </a></li>

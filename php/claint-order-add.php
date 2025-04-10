@@ -1,9 +1,5 @@
 <?php
 include_once "config.php";
-
-
-
-
 $name = mysqli_real_escape_string($con, $_POST['name']);
 $number = mysqli_real_escape_string($con, $_POST['number']);
 $adrese = mysqli_real_escape_string($con, $_POST['adrese']);

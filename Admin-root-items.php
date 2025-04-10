@@ -4,6 +4,8 @@ session_start();
 if($_SESSION["root_id_4448"] === "1"){
   if($_SESSION["user_id"] === "1"){
     
+    include_once "php/config.php";
+    $sql = mysqli_query($con, "SELECT * FROM items");
   
   }else{
     header("location: userdashbord.php");
@@ -52,8 +54,8 @@ header("location: userdashbord.php");
             <li ><a href="Admin-root-orders.php"><i class="fa-solid fa-boxes-stacked"></i>  </a></li>
             <li class="active"><a href="Admin-root-items.php"><i class="fa-solid fa-box"></i></a></li>
             <li><a href="Admin-root-addOrder.php"><i class="fa-solid fa-circle-plus fa-2xl"></i></a></li>
-            <li><a href="Admin-root-acount.php"><i class="fa-solid fa-user"></i> </a></li>
-            <li><a href="Admin-root-orders.php"><i class="fa-solid fa-users"></i></a></li>
+            <li><a href="Admin-root-acount.php"><i class="fa-solid fa-arrows-rotate"></i> </a></li>
+            <li><a href="Admin-root-users.php"><i class="fa-solid fa-users"></i></a></li>
             <li><a href="#darckMode" id="darckMode"><i class="fa-solid fa-moon"></i> </a></li>
             <li><a href="#darckMode" id="darckMode-w"><i class="fa-regular fa-moon"></i> </a></li>
           </ul>
@@ -65,7 +67,7 @@ header("location: userdashbord.php");
         </nav>
 
         <!-- start form add order  -->
-        <div class="contant addorder">
+        <div class="contant addorder" style="z-index: -10;">
           <div class="text-contct orderadd login-form" id="Add_Form_Order">
           <form action="#">
           <h3 class="wornig_maseg">رسالة خطا</h3>
@@ -130,78 +132,38 @@ header("location: userdashbord.php");
         <!-- end form add order  -->
         <!-- start root items  -->
         <div class="root-items root-orders">
-          <div class="order">
-            <a href="">
+
+        <?php
+
+        foreach($sql as $row){
+          $allImage = $row['item_images'];
+          $Image = explode(",", $allImage);
+
+          echo '<div class="order">
+            <a href="showItem.php?item_id='.$row["item_id"].'">
               <div class="imge-name-statues">
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Suscipit molestias deserunt voluptate nihil dignissimos
-                  repellat sed cum illo repellendus reiciendis neque officia
-                  dicta, explicabo veniam excepturi aperiam labore nesciunt non.
+                  '.$row["item_descrption"].'
                 </p>
                 <span class="OrderStatues">قيد المعالجة</span>
-                <h1 class="OrderClantName">فلاح</h1>
-                <img src="images/item-10.jpg" alt="" />
+                <h1 class="OrderClantName">'.$row["item_title"].'</h1>
+                <img src="php/Orders_images/'.$Image[0].'" alt="" />
               </div>
               <div class="detils">
                 <span class="OrderID">
-                  <a href=""><i class="fa-regular fa-pen-to-square"></i></a
+                  <a href="Admin-root-editItem.php?item_id='.$row["item_id"].'"><i class="fa-regular fa-pen-to-square"></i></a
                 ></span>
-                <span class="ClantNumber"> 44.000 IQD</span>
+                <span class="ClantNumber"> '.$row["item_price"] / 1000 . ',000 IQD</span>
                 <span class="pageName">
-                  <a href=""><i class="fa-solid fa-trash"></i></a
+                  <a href="php/Admin-root-deleteItme.php?item_id='.$row["item_id"].'"><i class="fa-solid fa-trash"></i></a
                 ></span>
               </div>
             </a>
-          </div>
-          <div class="order">
-            <a href="">
-              <div class="imge-name-statues">
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Suscipit molestias deserunt voluptate nihil dignissimos
-                  repellat sed cum illo repellendus reiciendis neque officia
-                  dicta, explicabo veniam excepturi aperiam labore nesciunt non.
-                </p>
-                <span class="OrderStatues">قيد المعالجة</span>
-                <h1 class="OrderClantName">صلاح</h1>
-                <img src="images/item-10.jpg" alt="" />
-              </div>
-              <div class="detils">
-                <span class="OrderID">
-                  <a href=""><i class="fa-regular fa-pen-to-square"></i></a
-                ></span>
-                <span class="ClantNumber"> 44.000 IQD</span>
-                <span class="pageName">
-                  <a href=""><i class="fa-solid fa-trash"></i></a
-                ></span>
-              </div>
-            </a>
-          </div>
-          <div class="order">
-            <a href="">
-              <div class="imge-name-statues">
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Suscipit molestias deserunt voluptate nihil dignissimos
-                  repellat sed cum illo repellendus reiciendis neque officia
-                  dicta, explicabo veniam excepturi aperiam labore nesciunt non.
-                </p>
-                <span class="OrderStatues">قيد المعالجة</span>
-                <h1 class="OrderClantName">صلاح</h1>
-                <img src="images/item-10.jpg" alt="" />
-              </div>
-              <div class="detils">
-                <span class="OrderID">
-                  <a href=""><i class="fa-regular fa-pen-to-square"></i></a
-                ></span>
-                <span class="ClantNumber"> 44.000 IQD</span>
-                <span class="pageName">
-                  <a href=""><i class="fa-solid fa-trash"></i></a
-                ></span>
-              </div>
-            </a>
-          </div>
+          </div>';
+        } ?>
+
+
+
         </div>
         <!-- end root items  -->
       </div>

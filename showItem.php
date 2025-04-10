@@ -2,10 +2,16 @@
 
 <?php 
 session_start();
-
+if(isset($_SESSION["user_id"])){
+   $user_id = $_SESSION["user_id"];
+   }elseif(isset($_SESSION["clint_id"])){
+       $user_id = $_SESSION["clint_id"];
+   }else{
+       $user_id = null;
+   }
 if(!isset($_SESSION["user_id"])){
    if(!isset($_SESSION["clint_id"])){
-      header("location: login.php");
+      header("location: Signup-Login.php");
    }
 
 }
@@ -28,216 +34,229 @@ if($sql){
    $images = explode(",", $imagesArry);
 
   }else{
-      header("location: allItems.php");
+      header("location: index.php");
 
   }
 
 
 }else{
-   header("location: allItems.php");
+   header("location: index.php");
 
 }
 }else{
-   header("location: allItems.php");
+   header("location: index.php");
 
 }
 
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-   <!-- fonts link  -->
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght,HEXP@160..700,0..100&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
-   <link rel="stylesheet" href="css/main.css">
-   <title>Ishtar</title>
-</head>
-<body>
-
-
-
-
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Fullscreen Overlay Navigation | CodingNepal</title>
+      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="css/normailze.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />   </head>
+   <body>
    <div class="LodeR"><span class="loader"></span></div>
-   
-  <div class=" ShowTtem home" style="height: auto;">
-   <div class="container" style="position: static;">
 
-
-
-      <nav class="navbar">
-         <h2 class="logo">عشتار</h2>
-         <ul class="menu-links">
-            <li><a href="index.php">الرئيسيه</a></li>
-            <li><a href="index.php#servises">الخدمات</a></li>
-            <li><a href="allItems.php">كل العناصر </a></li>
-            <li><a href="index.php#call">اتصل بنا</a></li>
-         </ul>
-      </nav>
-  <!-- start show item page  -->
-  <div class="contant addorder Addorder" style="
-   position: fixed;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.84);
-    top: -191px;
-    width: 100%;
-    left: 0px;
-    display: none;
-    min-height: 120vh;
-    overflow-x: auto;">
-        <div class="text-contct orderadd login-form" style="transform: translate(-50%, -23%); height:auto;">
-         
-      
-
-       <form action="#" enctype="multipart/form-data" class="Orderfordata">
-         
-         <div class="chacher" style="display: none;">
-
-         <h2 class="contact-title">  دفع زين كاش </h2>
-         <img src="images/images.jfif" alt="" style="width: 100%;">
-            <p style="line-height: 2;">
-               افتج محفظة زين كاش الخاصة بك <br>
-               اختر ارسال الاموال <br>
-            ادخل الرقم الموضح في الصورة او    امسح رمز الباركود الرقمي <br>
-           ارسل الاموال وخذ لقطة للشاشة <br>
-           ارفق لقطة الشاشة هنا واضغط ارسال <br>
-
-
-            </p>
-            <h3 class="wornig_maseg">رسالة خطا</h3>
-
-         <div class="imageiplod" style="
-   display: flex;
-    /* grid-template-columns: repeat(2, 50px); */
-    justify-content: center;
-    justify-items: center;">
-           <label for="image3" class="imageuplod"> <span>ارفع الصورة هنا</span>      <img src="images/deflot.png" alt=""  name="image3" id="Image3">
-           </label>
-           <input type="file" accept="image/png, image/jpg, image/jpeg" name="image3" id="image3" />
-          </div>
-           <input type="text" name="ClintPrice" id="ClintPrice" value="<?php echo $price['item_price'] ?>" hidden/>
-           <label for="chakDescrption" id="PriceWorin">  الوصف او الملاحضات </label>
-           <textarea name="chakDescrption" id="descrption"></textarea>
-           <div class="btns">
-            <button type="submit" class="sned"> ارسال </button>
-            <button type="button" id="disbolOrder" class="disbolOrder CHdisebol"> الغاء </button>
-
-           </div>
+      <!-- Nar Bar html code start  -->
+       <nav class="navbar">
+         <h1 class="logo">ISHTAR</h1>
+         <!-- saerch section  -->
+         <div class="saerch">
+            <form action="">
+               <input type="search" placeholder="what are you lookin for ?">
+            </form>
+            <div class="filter">
+               <h4>shots <i class="fa-solid fa-chevron-down"></i></h4>
+               <ul>
+                  <li><a href="">this is link 1</a></li>
+                  <li><a href="">and this is 2</a></li>
+                  <li><a href="">ther is 3</a></li>
+               </ul>
+            </div>
+            <button class="saerchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
          </div>
-   
-         <div class="datatext">    <div class="imageiplod">
-           <label for="image1" class="imageuplod"> <span>صورة النموذج</span>            <img src="images/deflot.png" alt=""  name="image1" id="Image1">
-           </label>
-           <input type="file" accept="image/png, image/jpg, image/jpeg" name="image1" id="image1" />
-           <label for="image2" class="imageuplod"> <span>صورة الطباعة </span>            <img src="images/deflot.png" alt="" name="image2"  id="Image2">
-           </label>
-           <input type="file" accept="image/png, image/jpg, image/jpeg" name="image2" id="image2" />
-          </div>
-          <label for="ordernumber" hidden>  رقم الطلب </label>
-          <input type="number" name="ordernumber" hidden id="ordernumber" />
-           <label for="name">   ادخل اسمك </label>
-           <input type="text" name="name" id="name" />
-           <label for="number"> رقم هاتف فعال </label>
-           <input type="number" name="number" id="number" />
-           <label for="email">العنوان الكامل </label>
-           <input type="text" name="adrese"  />
-           <label for="password" hidden> المبلغ الكامل  </label>
-           <label for="password" id="PriceWorin" hidden>   </label>
-           <input type="text" name="ClintPrice" id="ClintPrice" value="<?php echo  $row['UserPrice'] / 1000?>" hidden/>
-           <label for="descrption" id="PriceWorin">  الوصف او الملاحضات </label>
-           <textarea name="descrption" id="descrption"></textarea>
-           <div class="btns">
-            <button type="button" class="Sned"> التالي </button>
-            <button type="button" id="disbolOrder" class="DisbolOrder"> الغاء </button>
-           </div></div>
-       </form>
+        <!-- saerch section  -->
+         <!-- links section  -->
+          <ul class="mnu-links">
+            <li class="mnu-in-mnu">Explor <i class="fa-solid fa-chevron-down"></i></li>
+            <ul>
+               <li><a href="">link 1</a></li>
+               <li><a href="">link 2</a></li>
+               <li><a href="">link 3</a></li>
+            </ul>
+            <li><a href="">Find Jobs</a></li>
+            <li><a href="">Blog</a></li>
+          </ul>
+         <!-- links section  -->
+          <!-- sign up and log in section -->
+           <div class="log-in-sign-up">
+            <a href="#" class="sign-up">Sign Up</a>
+            <a href="#" class="sign-up log-in"> Log in</a>
+           </div>
+          <!-- sign up and log in section -->
+       </nav>
+      <!-- Nar Bar html code end  -->
 
+      <div class="showItem">
+        <div class="container">
+            <img src="php/Orders_images/<?php echo $images[0] ?>" alt="" class="Item_image">
+            <div class="contact">
+                <div class="Like-Title">
+                    <h1><?php echo $row['item_title'] ?> </h1>
+                    <i class="fa-regular fa-heart"></i>
+                </div>
+                <p> <?php echo $row['item_descrption'] ?></p>
+                <div class="imagesLibiry">
+                    <img src="php/Orders_images/<?php echo $images[1] ?>" alt="">
+                    <img src="php/Orders_images/<?php echo $images[2] ?>" alt="">
+                    <img src="php/Orders_images/<?php echo $images[3] ?>" alt="">
+                    <img src="php/Orders_images/<?php echo $images[0] ?>" alt="">
+                </div>
+                <div class="price">
+                    <h4><?php $price = $row['item_price'] / 1000; echo $price ?>,000<span>IQD</span></h4> <span class="OldPrice"><?php echo $row['item_price'] / 1000 + 16;  ?>,000</span>
+                </div>
+                <div class="actions">
+                  <button class="btn-orderadd">اطلب الان </button>
+                </div>
         </div>
-     </div>
-   <div class="show-item">
-
-    <div class="ContactShowImage">
-          <h2 class="TitleItem"><?php echo $row['item_title'] ?></h2>
-          <div class="images">
-            <div class="activeImage active" id="activeImage">
-              <img src="php/Orders_images/<?php echo $images[0] ?>" alt="">
-          </div>
-          <div class="activeImage active" id="activeImage">
-            <img src="php/Orders_images/<?php echo $images[1] ?>"alt="">
-        </div>
-        <div class="activeImage active" id="activeImage">
-          <img src="php/Orders_images/<?php echo $images[2] ?>" alt="">
       </div>
-            <div class="activeImage" id="activeImage">
-                <img src="php/Orders_images/<?php echo $images[3] ?>" alt=""  class="noactive">
+   </div>
+        <!-- Items Start  -->
+        <div class="items">
+         <h1 class="title">مزيد من المنتجات </h1>
+         <div class="container">
+            <!-- item  -->
+            <?php 
+
+$rows = mysqli_query($con, "SELECT * FROM items WHERE item_id != $id");
+
+
+    foreach($rows as $row_1){
+
+
+       $imagesArry_2 = $row_1['item_images'];
+       $Images_2 = explode("," , $imagesArry_2);
+
+       echo '
+       
+       <a href="showItem.php?item_id='.$row_1['item_id'].'"><div class="item">
+               <img src="php/Orders_images/' .$Images_2[0].'" onerror="this.onerror=null; this.src="images/slide-df.png"" alt="" loading="lazy">
+               <div class="contact">
+                  <img src="images/logo.png" onerror="this.onerror=null; this.src="images/slide-df.png"" alt="" loading="lazy">
+                  <h4>'.$row['item_title'].'t </h4>
+<div class="liks"><i class="fa-solid fa-heart"></i> '.$row_1["item_price"] / 250 - $row_1["item_id"] + $row_1["item_price"] /50 .'</div>
+                  <div class="views"><i class="fa-solid fa-eye"></i> '.$row_1["item_price"] / 250 - $row_1["item_id"] + $row_1["item_price"] /100 .'k</div>
+               </div>
+            </div>
+            </a>
+            ';
+      
+    }
+
+?>
+
+            <!-- item  -->
+         </div>
+        </div>
+       <!-- Items End  -->
+        <!-- Start Add Order Window  -->
+        <div class="add-order">
+            <form action="" class="order form_sendData" enctype="multipart/form-data">
+               <div class="order">
+               <div class="input">
+               <label for="fullName">الأسم</label>
+               <label class="wornig_maseg"></label>
+               <input type="text" name="name" id="fullName" placeholder="اكتب الاسم هنا .." />
+               <input type="text" name="ordernumber" id="fullName" placeholder="اكتب الاسم هنا .." value="1" hidden/>
+              </div>
+              <div class="input">
+               <label for="fullName">رقم الهاتف </label>
+               <input type="number" name="number" id="fullName"  placeholder="اكتب رقم الهاتف الخاص بك .."/>
+               <input type="number" name="user_id" value="<?php echo $user_id ?>" id="fullName"  placeholder="اكتب رقم الهاتف الخاص بك .." hidden/>
+              </div>
+              <div class="input">
+               <label for="fullName">العنوان </label>
+               <input type="text" name="ClintPrice" id="ClintPrice" value="<?php $price = $row['item_price'] ; echo $price ?>" hidden/>
+               <input type="text" name="adrese" id="fullName" placeholder="اكتب عنوانك هنا .."/>
+              </div>
+              <div class="input">
+               <label for="fullName">الوصف </label>
+               <input type="text" name="descrption"  value="<?php echo $row["item_descrption"] ?>" id="fullName" placeholder="اكتب الوصف الكامل هنا" style="height: 200px;" hidden/>
+               <input type="text" name="chakDescrption" id="fullName" placeholder="اكتب الوصف الكامل هنا" style="height: 200px;"/>
+              </div>
+              <div class="order-image">
+               <span>ورة الطباعه</span>
+               <label for="orderImage">
+                  <img src="images/d.png" alt="" width="80" id="ImageOrder">
+               </label>
+               <span>ارفق الصورة اللتي تريد طباعتها هنا  </span>
+               <input type="file"  id="orderImage" name="image2" hidden>
+               <input type="text"   name="image1" value="<?php echo $images[0] ?>" hidden>
+              </div>
+              <button type="submit" >التالي </button>
+              <button class="closedAddorder" type="button">الغاء </button>
+               </div>
+               <div class="payment-window">
+         
+         <div class="zainCash-payment">
+            
+            <div class="container">  
+
+               <div class="zainCash-QR">
+                  <h3>ادفع بل زين كاش </h3>
+                  <ul>
+                        <li>Lorem ipsum, dolor sitexpedita</li>
+                        <li>Lorem ipsum, Lorem. Lorem ipsum dolor sit. expedita</li>
+                        <li>Lorem ipsum, dolopedita</li>
+                        <li>Lorem ipsum, dolor sit amet  Nobis expedita</li>
+                        <li>Lorem ipsum, dolor sit amet consectet</li>
+                  </ul>
+                  
+                  <h2>7811930693</h2>
+
+                  <img src="images/images (3).png" alt="" >
+                  <form action="">
+                        <h4 style="text-align:center">ارفق صوره الدفع هنا </h4>
+                        <label for="uploadScrrnshot"><img src="images/d.png" alt="" width="20" id="uploadScrrnshotImg"></label>
+                        <input type="file" name="ZainCheckImage" id="uploadScrrnshot" hidden>
+                        <button class="up-zain-btn botton_send_order"  type="submit">تم الدفع</button>
+                  </form>
+               </div>
+               <div class="order-detelis">
+                  <h1> المبلغ المطلوب  <span class="price">543543</span>,000</h1>
+                  <div class="input">
+                        <h4 >الأسم</h4>
+                        <p class="name">Huzaifa Karim</p>
+                  </div>
+                  <div class="input">
+                        <h4 >رقم الهاتف </h4>
+                        <p class="number">07811930693</p>
+                  </div>
+                  <div class="input">
+                        <h4 >العنوان </h4>
+                        <p class="addrese">بغداد شارع الرصافه قرب الجامعه </p>
+                  </div>
+                  <h3 class="price-order">130,000 <span>IQD</span></h3>
+                  <div class="images">
+                        <img src="images/item1.jpg" alt="" class="Order_image" >
+                        <i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i><i class="fa-solid fa-angle-left"></i></i>
+                        <img src="php/Orders_images/<?php echo $images[0] ?>" alt="">
+                  </div>
+         
+               </div>
             </div>
 
-
-
-            
-         </div>
-          <p><?php echo $row['item_descrption'] ?></p>
-             
-     
-             <div class="price">         <span class="com"><?php echo $row['UserPrice'] / 1000 + 16;  ?>,000  IQD</span>    <span><?php $price = $row['UserPrice'] / 1000; echo $price ?>,000 IQD</span>
-
-             </div>
-             <button  class="addtoCard">اطلب الان </button> 
-             
-             
-    </div>
-    <div class="imageslider">
-        <img src="php/Orders_images/<?php echo $images[0] ?>" alt="" >
-    </div>
-   </div>
-  <!-- end show item page  -->
-      
-   </div>
-   
+      </div>
   </div>
+            </form>
+        </div>
+        <!-- End Add Order Window  -->
+       
 
-  <!-- more product html code  -->
-     <!-- start items page  -->
- <div class="itmes more-product" id="items">
-  <div class="container">
-     <div class="saerch">
-     </div>
-     <div class="items-box">
-
-     <?php 
-
-     $rows = mysqli_query($con, "SELECT * FROM items WHERE item_id != $id");
-     
-
-         foreach($rows as $row_1){
-
-
-            $imagesArry_2 = $row_1['item_images'];
-            $Images_2 = explode("," , $imagesArry_2);
-
-            echo '<div class="itme" id="Item">
-           <a href="?item_id=' .$row_1['item_id'].'">
-              <img src="php/Orders_images/' .$Images_2[0].'" alt="">
-           </a>
-           <p id="ItemName">' .$row_1['item_descrption'].' </p>
-        </div>';
-           
-         }
-
-     ?>
-
-        
-     </div>
-  </div>
-</div>
-<!-- end items page  -->
-  <!-- more product html code  -->
-
-
-<script src="js/showImage.js"></script>   
-</body>
+         <script src="js/script.js"></script>
+         <script src="js/showImage.js"></script>
+   </body>
 </html>

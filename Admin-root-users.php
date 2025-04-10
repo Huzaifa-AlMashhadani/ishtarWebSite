@@ -47,7 +47,7 @@ if($_SESSION["root_id_4448"] === "1"){
             <li ><a href="Admin-root-orders.php"><i class="fa-solid fa-boxes-stacked"></i>  </a></li>
             <li><a href="Admin-root-items.php"><i class="fa-solid fa-box"></i></a></li>
             <li><a href="Admin-root-addOrder.php"><i class="fa-solid fa-circle-plus fa-2xl"></i></a></li>
-            <li><a href="Admin-root-acount.php"><i class="fa-solid fa-user"></i> </a></li>
+            <li><a href="Admin-root-acount.php"><i class="fa-solid fa-arrows-rotate"></i></a></li>
             <li class="active"><a href="Admin-root-orders.php"><i class="fa-solid fa-users"></i></a></li>
             <li><a href="#darckMode" id="darckMode"><i class="fa-solid fa-moon"></i> </a></li>
             <li><a href="#darckMode" id="darckMode-w"><i class="fa-regular fa-moon"></i> </a></li>
@@ -79,7 +79,8 @@ if($_SESSION["root_id_4448"] === "1"){
          <span class="OrderStatues" style="display: none;">Statues</span>
          <h1 class="OrderClantName"> ' . $row['name'] . ' </h1>
          <h1 class="OrderClantName"> ' . $row['Phnumber'] . ' </h1>
-         <img src="php/Orders_images/' . $image . '" alt="">
+         <a href="php/Admin-root-DeletUser.php?user_id='. $row['user_id'] .'" class="delete"><i class="fa-solid fa-trash"></i></a>
+         <img src="images/'. $image . '" alt="">
      </div>
      <div class="detils">
          <span class="OrderID"></span>

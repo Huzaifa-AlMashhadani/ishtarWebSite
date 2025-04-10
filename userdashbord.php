@@ -5,7 +5,9 @@ session_start();
 
 if(!isset($_SESSION["user_id"])){
    if(!isset($_SESSION["clint_id"])){
-      header("location: login.php");
+      header("location: Signup-Login.php");
+   }else{
+      header("location: index.php");
    }
 
 }
